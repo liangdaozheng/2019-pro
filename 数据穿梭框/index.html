@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>数据穿梭框</title>
+  <link rel="stylesheet" href="index.css" >
+  <style>
+    .show{
+      width:200px;
+      height: 500px;
+      margin:0 auto;
+    }
+    .show ul{
+      list-style: none;
+      font-size: 2rem;
+      color: rgb(237, 8, 245);
+    }
+
+  </style>
+</head>
+<body>
+  <!-- 触发事件的按钮 -->
+  <button class="data_btn" id="btn_go">晚上吃啥？</button>
+    <!-- 要选中后宣示的内容到页面上 -->
+  <div class="show">
+    <ul>
+    </ul>
+  </div>
+  <!-- 弹框的容器 -->
+  <div id="msg_box">
+    <!-- <div class="msg_box_main">
+     
+      <header class="msg_box_header">
+        <span class="title_font">数据穿梭框-示例</span>
+        <span class="cancel_del" data-cancel="close"></span>
+      </header>
+     
+      <nav class="msg_box_nav">
+        
+        <div class="left_right_box">
+          <ul data-datalist="left">
+            <li><input type="checkbox" name="" id="1"><span>12</span></li>
+            <li><input type="checkbox" name="" id="2"><span>34</span></li>
+            <li><input type="checkbox" name="" id="3"><span>56</span></li>
+            <li><input type="checkbox" name="" id="4"><span>78</span></li>
+            <li><input type="checkbox" name="" id="5"><span>98</span></li>
+          </ul>  
+        </div>
+       
+        <div class="left_right_box left_box_bet">
+          <ul data-datalist="right">
+            <li><span>12</span><span class="cancel_del"></span></li>
+            <li><span>34</span><span class="cancel_del"></span></li>
+            <li><span>56</span><span class="cancel_del"></span></li>
+          </ul>
+        </div>
+      </nav>
+     
+      <footer class="msg_box_footer">
+        <button data-cancel="cancel">取消</button>
+        <button data-confirm="ok">确定</button>
+      </footer>
+    </div> -->
+  </div>
+  <script src="index.js"></script>
+  <script>
+    // 准备的数据
+    var data=[
+  {id:1,value:"鲁菜"},
+  {id:2,value:"川菜"},
+  {id:3,value:"粤菜"},
+  {id:4,value:"苏菜"},
+  {id:5,value:"闽菜"},
+  {id:6,value:"浙菜"},
+  {id:8,value:"湘菜"},
+  {id:9,value:"徽菜"},
+  {id:10,value:"西餐"},
+  {id:11,value:"西点"},
+  {id:12,value:"药膳"},
+  {id:13,value:"私房菜"},
+  {id:14,value:"家常菜"}
+  ];
+    //调用函数实现弹框的功能，及数据的交互
+    dataThroughList({
+      data,
+      elem1:'#btn_go',
+      elem2:'#msg_box',
+      title:'今晚餐的菜单',
+      cancle:function(da){
+        console.log(da)
+      },
+      confirm:function(dat){
+        console.log(dat);
+        var html=``;
+        for(var tmp of dat){
+          html+=`
+           <li>${tmp.value}</li>
+          `;
+        };
+        document.querySelector('.show>ul').innerHTML=html;
+      }
+    });
+  </script>
+</body>
+</html>
